@@ -1,0 +1,399 @@
+:root {
+  --bg: #0b0c0e;
+  --panel: #101215;
+  --line: #2a2e33;
+  --text: #c8cdc4;
+  --dim: #6d736c;
+  --phos: #8cff6a;
+  --amber: #d4b483;
+  --cyan: #7ec8c8;
+  --sel: #3d5c58;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  min-height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 12px;
+  line-height: 1.45;
+  letter-spacing: 0.01em;
+}
+
+em {
+  font-style: normal;
+  color: var(--phos);
+  font-variant-numeric: tabular-nums;
+}
+
+.shell {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+.topbar,
+.status {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 0.55rem 0.85rem;
+  border-bottom: 1px solid var(--line);
+  color: var(--dim);
+  font-size: 11px;
+}
+
+.status {
+  border-bottom: 0;
+  border-top: 1px solid var(--line);
+  margin-top: auto;
+}
+
+.topbar-left,
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+}
+
+.mark {
+  color: var(--phos);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  font-size: 11px;
+}
+
+.sep {
+  color: #3a3f44;
+}
+
+.dim {
+  color: var(--dim);
+}
+
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(220px, 280px) minmax(0, 1fr) minmax(220px, 300px);
+  gap: 0;
+  flex: 1;
+  min-height: 0;
+}
+
+.rail {
+  border-right: 1px solid var(--line);
+  padding: 0.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  background: var(--panel);
+}
+
+.rail:last-of-type {
+  border-right: 0;
+  border-left: 1px solid var(--line);
+}
+
+.panel {
+  border: 1px solid var(--line);
+  padding: 0.65rem 0.7rem 0.75rem;
+}
+
+.panel h2 {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 0.55rem;
+}
+
+.kv {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.kv div {
+  display: grid;
+  grid-template-columns: 88px 1fr;
+  gap: 0.4rem;
+  align-items: baseline;
+}
+
+.unit {
+  color: var(--dim);
+  font-size: 10px;
+}
+
+.plain {
+  color: var(--text);
+  font-size: 11px;
+  line-height: 1.55;
+  margin-bottom: 0.55rem;
+}
+
+.plain:last-child {
+  margin-bottom: 0;
+}
+
+.status-line {
+  color: var(--phos);
+  font-size: 11px;
+  margin-bottom: 0.55rem;
+}
+
+.kv dt {
+  color: var(--dim);
+}
+
+.kv dd {
+  color: var(--phos);
+  font-variant-numeric: tabular-nums;
+}
+
+.spark {
+  display: block;
+  width: 100%;
+  height: 36px;
+  margin-top: 0.55rem;
+  border: 1px solid var(--line);
+  background: #0a0b0d;
+}
+
+.eq {
+  color: var(--cyan);
+  font-size: 11px;
+  line-height: 1.55;
+  margin-bottom: 0.65rem;
+}
+
+.eq sub {
+  font-size: 9px;
+}
+
+.methods {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 0.65rem;
+}
+
+.methods li {
+  color: var(--dim);
+  padding: 0.2rem 0.35rem;
+  border-left: 2px solid transparent;
+}
+
+.methods li.on {
+  color: var(--text);
+  border-left-color: var(--cyan);
+  background: #141a1a;
+}
+
+.fine {
+  color: var(--dim);
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.film {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 0.7rem 0.85rem 0.85rem;
+}
+
+.film-meta {
+  display: flex;
+  justify-content: space-between;
+  color: var(--dim);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+
+.film-frame {
+  position: relative;
+  flex: 1;
+  min-height: 240px;
+  border: 1px solid var(--line);
+  background: #050607;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.film-frame canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  image-rendering: auto;
+  cursor: grab;
+}
+
+.film-frame canvas:active {
+  cursor: grabbing;
+}
+
+.cross {
+  pointer-events: none;
+  position: absolute;
+  inset: 50% auto auto 50%;
+  width: 9px;
+  height: 9px;
+  margin: -5px 0 0 -5px;
+  border: 1px solid rgba(142, 255, 106, 0.35);
+}
+
+.film-overlay {
+  position: absolute;
+  left: 0.7rem;
+  right: 0.7rem;
+  bottom: 0.7rem;
+  color: var(--phos);
+  font-size: 11px;
+  pointer-events: none;
+  text-shadow: 0 0 12px #000;
+  transition: opacity 0.6s ease;
+}
+
+.film-overlay.hide {
+  opacity: 0;
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-bottom: 0.65rem;
+  color: var(--dim);
+}
+
+.btns {
+  display: flex;
+  gap: 1px;
+  border: 1px solid var(--line);
+}
+
+.btns button,
+.full,
+.boot-skip {
+  font: inherit;
+  color: var(--text);
+  background: #16181c;
+  border: 0;
+  padding: 0.35rem 0.45rem;
+  cursor: pointer;
+}
+
+.btns button {
+  flex: 1;
+}
+
+.btns button.on,
+.btns button:hover,
+.full:hover,
+.boot-skip:hover {
+  background: var(--sel);
+  color: var(--phos);
+}
+
+.film-hint {
+  margin-top: 0.45rem;
+  color: var(--dim);
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.full {
+  width: 100%;
+  border: 1px solid var(--line);
+  margin-top: 0.35rem;
+}
+
+.slider {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 0.55rem;
+  color: var(--dim);
+}
+
+.slider input {
+  accent-color: var(--phos);
+  width: 100%;
+}
+
+.note p {
+  margin-bottom: 0.55rem;
+}
+
+.note-kicker {
+  color: var(--amber) !important;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+}
+
+.sign {
+  color: var(--phos);
+  margin-bottom: 0 !important;
+}
+
+.boot {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.25rem;
+}
+
+.boot.gone {
+  display: none;
+}
+
+.boot-log {
+  color: var(--phos);
+  font: inherit;
+  white-space: pre-wrap;
+  margin-bottom: 1rem;
+}
+
+.boot-skip {
+  align-self: flex-start;
+  border: 1px solid var(--line);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 10px;
+}
+
+@media (max-width: 900px) {
+  .workspace {
+    grid-template-columns: 1fr;
+  }
+
+  .rail {
+    border: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .film-frame {
+    min-height: 52vw;
+    aspect-ratio: 4 / 3;
+  }
+}
